@@ -1,40 +1,15 @@
-resource "proxmox_vm_qemu" "pihole" {
-    name        = "pihole-server"
-    target_node = var.target_node
-    memory      = var.memory
-    cores       = 2
-    scsihw      = "virtio-scsi-single"
-    full_clone  = var.full_clone
-    agent       = 1
-    qemu_os     = "l26"
-    #ipconfig0   = "dhcp"
+module "vm_single_instance" {
+  source = "github.com/Ngel-Castro/proxmox_single_vm_module"
 
-    ### or for a Clone VM operation
-    clone = var.template_name
-    disks {
-        scsi {
-            scsi0 {
-                disk {
-                    backup             = true
-                    cache              = "none"
-                    discard            = true
-                    emulatessd         = true
-                    iothread           = true
-                    mbps_r_burst       = 0.0
-                    mbps_r_concurrent  = 0.0
-                    mbps_wr_burst      = 0.0
-                    mbps_wr_concurrent = 0.0
-                    replicate          = true
-                    size               = 32
-                    storage            = var.storage
-                }
-            }
-        }
-    }
-    network {
-        bridge    = var.network_bridge
-        firewall  = false
-        link_down = false
-        model     = "virtio"
-    }
+  # Pass in required variables
+    proxmox_host      = var.proxmox_host
+    proxmox_token_id  = var.proxmox_token_id
+    proxmox_token_secret = var.proxmox_token_secret
+    target_node       = var.target_node
+    storage           = var.storage
+    full_clone        = var.full_clone
+    template_name     = var.template_name
+    network_bridge    = var.network_bridge
+    memory            = var.memory
+    name              = var.name
 }

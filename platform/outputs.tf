@@ -1,3 +1,4 @@
 output "pihole-ip" {
-    value = local.pihole
+    value = module.vm_single_instance.vm_ip
+    description = "The IP address of the Pi-hole VM"
 }

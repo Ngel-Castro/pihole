@@ -47,3 +47,8 @@ variable "memory" {
   type        = number
   default     = 2048
 }
+
+variable "name" {
+  description = "Name of the VM"
+  type        = string
+}
