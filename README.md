@@ -7,9 +7,10 @@ Pi-hole is a network-wide ad blocker that acts as a DNS sinkhole. It is designed
 To install Pi-hole, follow the steps below:
 
 ```
+source ~/.secrets
 tofu init
-tofu plan -var-file=clusters/proxmox/dev/tofu.tfvars -var="proxmox_token_id=${PROXMOX_TOKEN_ID}" -var="proxmox_token_secret=${PROXMOX_TOKEN_SECRET}"
-tofu apply --auto-approve -var-file=clusters/proxmox/dev/tofu.tfvars -var="proxmox_token_id=${PROXMOX_TOKEN_ID}" -var="proxmox_token_secret=${PROXMOX_TOKEN_SECRET}"
+tofu plan -var-file=env/proxmox/dev/tofu.tfvars -var="proxmox_token_id=${PROXMOX_TOKEN_ID}" -var="proxmox_token_secret=${PROXMOX_TOKEN_SECRET}"
+tofu apply --auto-approve -var-file=env/proxmox/dev/tofu.tfvars -var="proxmox_token_id=${PROXMOX_TOKEN_ID}" -var="proxmox_token_secret=${PROXMOX_TOKEN_SECRET}"
 ```
 ## Requirements
 
